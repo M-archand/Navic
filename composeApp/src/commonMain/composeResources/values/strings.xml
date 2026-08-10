@@ -193,9 +193,6 @@
 	<string name="info_status_downloading">Downloading in progress...</string>
 	<string name="info_sync_never">Never</string>
 	<string name="info_sync_just_now">Just now</string>
-	<string name="info_sync_mins_ago">%1$d m ago</string>
-	<string name="info_sync_hours_ago">%1$d h ago</string>
-	<string name="info_sync_date_format">%1$d %2$s</string>
 	<string name="info_bulk_download_warning">Are you sure you want to download every album by %1$s?\nThis may require a significant amount of storage and data.</string>
 	<string name="info_library_download_warning">Are you sure you want to download your entire library? \nThis will skip items you've already downloaded, but it may still consume a significant amount of storage space and data.</string>
 	<string name="info_library_download">Save all synced music for offline playback</string>
@@ -273,6 +270,21 @@
 	<plurals name="count_hours">
 		<item quantity="one">%1$d hour</item>
 		<item quantity="other">%1$d hours</item>
+	</plurals>
+
+	<plurals name="count_minutes_ago">
+		<item quantity="one">%1$d minute ago</item>
+		<item quantity="other">%1$d minutes ago</item>
+	</plurals>
+
+	<plurals name="count_hours_ago">
+		<item quantity="one">%1$d hour ago</item>
+		<item quantity="other">%1$d hours ago</item>
+	</plurals>
+
+	<plurals name="count_days_ago">
+		<item quantity="one">%1$d day ago</item>
+		<item quantity="other">%1$d days ago</item>
 	</plurals>
 
 	<plurals name="count_rate_stars">
