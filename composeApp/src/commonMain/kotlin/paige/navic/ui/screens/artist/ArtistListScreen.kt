@@ -17,7 +17,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.lifecycle.compose.dropUnlessResumed
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import kotlinx.collections.immutable.ImmutableList
@@ -158,7 +157,6 @@ fun ArtistListScreenGridItem(
 	onSetStarred: (starred: Boolean) -> Unit
 ) {
 	val backStack = LocalNavStack.current
-	val uriHandler = LocalUriHandler.current
 
 	var playlistDialogShown by rememberSaveable { mutableStateOf(false) }
 
@@ -185,20 +183,6 @@ fun ArtistListScreenGridItem(
 				onPlayNext = onPlayNext,
 				onAddToQueue = onAddToQueue,
 				onAddAllToPlaylist = { playlistDialogShown = true },
-				onViewOnLastFm = {
-					onDeselect()
-					artist.lastFmUrl?.let { url ->
-						uriHandler.openUri(url)
-					}
-				},
-				onViewOnMusicBrainz = {
-					onDeselect()
-					artist.musicBrainzId?.let { id ->
-						uriHandler.openUri(
-							"https://musicbrainz.org/artist/$id"
-						)
-					}
-				},
 				starred = starred,
 				onSetStarred = { onSetStarred(!starred) }
 			)

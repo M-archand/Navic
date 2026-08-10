@@ -10,9 +10,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.dropUnlessResumed
@@ -34,6 +37,7 @@ import paige.navic.icons.Icons
 import paige.navic.icons.outlined.ChevronForward
 import paige.navic.ui.components.common.Form
 import paige.navic.ui.components.common.FormRow
+import paige.navic.ui.components.dialogs.LinkConfirmationDialog
 import paige.navic.ui.components.layouts.NestedTopBar
 import paige.navic.ui.navigation.Screen
 import paige.navic.ui.screens.settings.components.SettingSwitchRow
@@ -44,10 +48,10 @@ fun SettingsAboutScreen() {
 	val preferenceManager = koinInject<PreferenceManager>()
 	@Suppress("DEPRECATION")
 	val clipboard = LocalClipboardManager.current
-	val uriHandler = LocalUriHandler.current
 	val backStack = LocalNavStack.current
 	val platformContext = LocalPlatformContext.current
 	val hideBack = platformContext.sizeClass.widthSizeClass >= WindowWidthSizeClass.Medium
+	var linkToOpen by rememberSaveable { mutableStateOf<String?>(null) }
 
 	Scaffold(
 		topBar = {
@@ -84,19 +88,19 @@ fun SettingsAboutScreen() {
 
 			Form {
 				FormRow(onClick = {
-					uriHandler.openUri("https://github.com/ssalggnikool/Navic")
+					linkToOpen = "https://github.com/ssalggnikool/Navic"
 				}) {
 					Text(stringResource(Res.string.title_github))
 					Icon(Icons.Outlined.ChevronForward, null)
 				}
 				FormRow(onClick = {
-					uriHandler.openUri("https://codeberg.org/paige/Navic")
+					linkToOpen = "https://codeberg.org/paige/Navic"
 				}) {
 					Text(stringResource(Res.string.title_codeberg))
 					Icon(Icons.Outlined.ChevronForward, null)
 				}
 				FormRow(onClick = {
-					uriHandler.openUri("https://discord.gg/TBcnNX66PH")
+					linkToOpen = "https://discord.gg/TBcnNX66PH"
 				}) {
 					Text(stringResource(Res.string.title_discord_server))
 					Icon(Icons.Outlined.ChevronForward, null)
@@ -120,5 +124,12 @@ fun SettingsAboutScreen() {
 				}
 			}
 		}
+	}
+
+	if (linkToOpen != null) {
+		LinkConfirmationDialog(
+			linkToOpen = linkToOpen!!,
+			onDismissRequest = { linkToOpen = null }
+		)
 	}
 }

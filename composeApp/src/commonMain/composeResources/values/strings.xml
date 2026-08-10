@@ -63,6 +63,7 @@
 	<string name="title_lyric_providers">Lyric providers</string>
 	<string name="title_github">GitHub</string>
 	<string name="title_codeberg">Codeberg</string>
+	<string name="title_link_confirmation">Leaving Navic</string>
 
 	<string name="subtitle_appearance">Themes, colours, layout, app icon</string>
 	<string name="subtitle_now_playing">Customise the now playing &amp; lyrics views</string>
@@ -358,6 +359,7 @@
 	<string name="action_open_settings">Open settings</string>
 	<string name="action_reset">Reset</string>
 	<string name="action_configure_lyric_providers">Configure lyric providers</string>
+	<string name="action_visit_site">Visit site</string>
 	<string name="subtitle_rebuild_database">Wipes all local metadata and forces a fresh sync</string>
 
 	<string name="notice_deleted_playlist">Deleted playlist.</string>
@@ -377,6 +379,7 @@
 	<string name="notice_login_suggestion">Did you mean...</string>
 	<string name="notice_queue_duplicate">This song is already in the queue. Do you really want to add it again?</string>
 	<string name="notice_local_network_denied">Permission denied</string>
+	<string name="notice_link_confirmation">This link is taking you to the following website:</string>
 
 	<string name="info_app_version">Navic %1$s</string>
 	<string name="info_action_is_permanent">This action cannot be undone</string>
