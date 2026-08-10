@@ -24,6 +24,7 @@ import navic.composeapp.generated.resources.info_syncing_playlists
 import navic.composeapp.generated.resources.info_syncing_radios
 import navic.composeapp.generated.resources.info_syncing_saved
 import org.jetbrains.compose.resources.StringResource
+import org.jetbrains.compose.resources.getString
 import paige.navic.data.database.dao.AlbumDao
 import paige.navic.data.database.dao.ArtistDao
 import paige.navic.data.database.dao.GenreDao
@@ -85,8 +86,8 @@ class DbRepository(
 	suspend fun syncEverything(
 		onProgress: (Float, StringResource) -> Unit = { _, _ -> }
 	): Result<Unit> = runDbOp {
-		val progressCallback = { progress: Float, message: StringResource ->
-			Logger.i("DbRepository", "$progress $message")
+		val progressCallback = suspend { progress: Float, message: StringResource ->
+			Logger.i("DbRepository", "$progress ${getString(message)}")
 			onProgress(progress, message)
 		}
 
@@ -151,7 +152,7 @@ class DbRepository(
 	}
 
 	suspend fun syncLibrarySongs(
-		onProgress: (Float, StringResource) -> Unit = { _, _ -> }
+		onProgress: suspend (Float, StringResource) -> Unit = { _, _ -> }
 	): Result<Pair<Set<String>, Set<String>>> = runDbOp {
 		val pageSize = 500
 		var offset = 0
