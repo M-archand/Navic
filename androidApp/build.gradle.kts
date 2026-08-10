@@ -8,6 +8,8 @@ plugins {
 	alias(libs.plugins.composeCompiler)
 }
 
+val isTaskRelease = gradle.startParameter.taskNames.any { it.contains("release", ignoreCase = true) }
+
 extensions.configure<ApplicationExtension> {
 	namespace = "paige.navic.androidApp"
 	compileSdk = libs.versions.android.compileSdk.get().toInt()
@@ -21,13 +23,12 @@ extensions.configure<ApplicationExtension> {
 		applicationId = "paige.navic"
 		minSdk = libs.versions.android.minSdk.get().toInt()
 		targetSdk = libs.versions.android.targetSdk.get().toInt()
-		versionCode = 45
-		versionName = "v1.0.0-alpha45"
+		versionCode = 46
+		versionName = "v1.0.0-alpha46"
 
 		ndk {
 			abiFilters.addAll(listOf("arm64-v8a", "armeabi-v7a"))
-			val isRelease = System.getenv("RELEASE")?.toBoolean() ?: false
-			if (!isRelease) {
+			if (!isTaskRelease) {
 				abiFilters.add("x86_64")
 			}
 		}
@@ -43,20 +44,15 @@ extensions.configure<ApplicationExtension> {
 	}
 
 	buildTypes {
-		val isRelease = System.getenv("RELEASE")?.toBoolean() ?: false
-		val hasReleaseSigning = System.getenv("SIGNING_STORE_PASSWORD")?.isNotEmpty() == true
-
-		if (isRelease && !hasReleaseSigning) {
-			throw GradleException("Missing keystore in a release workflow!")
-		}
-
 		getByName("release") {
 			isMinifyEnabled = true
 			isDebuggable = false
 			isProfileable = false
 			isJniDebuggable = false
 			isShrinkResources = true
-			signingConfig = signingConfigs.getByName(if (hasReleaseSigning) "release" else "debug")
+			signingConfig = signingConfigs
+				.getByName("release")
+				.takeIf { it.storeFile != null }
 			proguardFiles(
 				getDefaultProguardFile("proguard-android-optimize.txt"),
 				"proguard-rules.pro"
