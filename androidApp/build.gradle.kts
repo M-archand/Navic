@@ -50,7 +50,7 @@ extensions.configure<ApplicationExtension> {
 			isProfileable = false
 			isJniDebuggable = false
 			isShrinkResources = true
-			signingConfig = signingConfigs.getByName("release").takeIf { it.storeFile != null }
+			signingConfig = signingConfigs.findByName("release")?.takeIf { it.storeFile != null }
 			proguardFiles(
 				getDefaultProguardFile("proguard-android-optimize.txt"),
 				"proguard-rules.pro"
