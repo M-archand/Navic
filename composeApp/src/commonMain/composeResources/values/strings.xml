@@ -29,8 +29,7 @@
 	<string name="title_radios">Radios</string>
 	<string name="title_all">All</string>
 	<string name="title_similar_artists">Similar artists</string>
-	<string name="title_source">Source code</string>
-	<string name="title_chat">Chat</string>
+	<string name="title_discord_server">Discord server</string>
 	<string name="title_shares">Shares</string>
 	<string name="title_choose_font">Application font</string>
 	<string name="title_fonts_inbuilt">In-built</string>
@@ -62,22 +61,24 @@
 	<string name="title_account">Account</string>
 	<string name="title_track_info">Track info</string>
 	<string name="title_lyric_providers">Lyric providers</string>
+	<string name="title_github">GitHub</string>
+	<string name="title_codeberg">Codeberg</string>
 
 	<string name="subtitle_appearance">Themes, colours, layout, app icon</string>
-	<string name="subtitle_now_playing">Customise the fullscreen now playing and lyrics views</string>
+	<string name="subtitle_now_playing">Customise the now playing &amp; lyrics views</string>
 	<string name="subtitle_bottom_app_bar">Customise the bottom bar &amp; mini player</string>
-	<string name="subtitle_playback">Audio behaviour and scrobbling</string>
-	<string name="subtitle_data_storage">Manage sync, network usage, and cache</string>
+	<string name="subtitle_playback">Audio effects &amp; behaviour, scrobbling</string>
+	<string name="subtitle_data_storage">Syncing, caching, data usage</string>
 	<string name="subtitle_trigger_sync">Forces a full library pull immediately</string>
 	<string name="subtitle_pending_actions">%1$d items waiting for network</string>
-	<string name="subtitle_developer">Debugging, testing</string>
-	<string name="subtitle_about">App info, version, licenses</string>
+	<string name="subtitle_developer">Debugging, testing, logs</string>
+	<string name="subtitle_about">App info, version, updates, licences</string>
 	<string name="subtitle_playlist">Playlist</string>
 	<string name="subtitle_enable_scrobbling">Scrobble played tracks to your Navidrome server</string>
 	<string name="subtitle_gapless_playback">Experimental. Requires application restart. May conflict with audio offload on some devices</string>
 	<string name="subtitle_audio_offload">Experimental. Requires application restart. May conflict with gapless playback on some devices</string>
 	<string name="subtitle_now_playing_background_style">Choose static if you have performance issues</string>
-	<string name="subtitle_check_for_updates">It is recommended to leave this on, as some updates provide important bug fixes</string>
+	<string name="subtitle_check_for_updates">Check GitHub for updates when the app opens</string>
 	<string name="subtitle_offline_mode">Dictates when the app should go in an offline mode. Requires application restart</string>
 	<string name="subtitle_streaming_quality">Adjust the quality of streamed music</string>
 	<string name="subtitle_download_quality">Adjust the quality of downloaded music</string>
@@ -223,7 +224,7 @@
 	<string name="option_navigation_bar_label_visibility_always">Always</string>
 	<string name="option_navigation_bar_label_visibility_only_selected">Only selected</string>
 	<string name="option_navigation_bar_label_visibility_never">Never</string>
-	<string name="option_navigation_bar_tabs">Reorder navigation bar tabs</string>
+	<string name="option_navigation_bar_tabs">Configure navigation bar tabs</string>
 
 	<string name="option_mini_player_style">Mini player style</string>
 	<string name="option_mini_player_style_unified">Unified</string>
