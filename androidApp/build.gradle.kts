@@ -11,6 +11,7 @@ plugins {
 extensions.configure<ApplicationExtension> {
 	namespace = "paige.navic.androidApp"
 	compileSdk = libs.versions.android.compileSdk.get().toInt()
+	ndkVersion = "28.2.13676358"
 
 	buildFeatures {
 		resValues = true
