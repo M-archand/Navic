@@ -9,7 +9,6 @@ import android.media.audiofx.Equalizer
 import android.net.Uri
 import android.os.Bundle
 import androidx.annotation.OptIn
-import androidx.compose.runtime.snapshotFlow
 import androidx.core.net.toUri
 import androidx.lifecycle.viewModelScope
 import androidx.media3.common.AudioAttributes
@@ -45,8 +44,6 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -479,52 +476,6 @@ class AndroidMediaPlayerViewModel(
 					pendingSyncState = null
 				}
 				checkAndAutoFillQueue()
-
-				combine(
-					downloadManager.downloadedSongs,
-					connectivityManager.isCellular,
-					snapshotFlow { preferenceManager.streamingQualityWifi },
-					snapshotFlow { preferenceManager.streamingQualityCellular },
-					snapshotFlow { preferenceManager.isAdvancedTranscodingActive },
-					snapshotFlow { preferenceManager.customMaxBitrateWifi },
-					snapshotFlow { preferenceManager.customMaxBitrateCellular },
-					snapshotFlow { preferenceManager.customFormatWifi },
-					snapshotFlow { preferenceManager.customFormatCellular }
-				) { it }.collectLatest { args ->
-					@Suppress("UNCHECKED_CAST")
-					val downloadedMap = args[0] as Map<String, String>
-					val player = controller ?: return@collectLatest
-					val currentIndex = player.currentMediaItemIndex
-
-					for (i in 0 until player.mediaItemCount) {
-						if (i == currentIndex) continue
-
-						val item = player.getMediaItemAt(i)
-						val id = item.mediaId
-						val localPath = downloadedMap[id]
-
-						val isCurrentlyLocal = item.localConfiguration?.uri?.scheme == "file"
-
-						val newItem = if (localPath != null) {
-							if (!isCurrentlyLocal) {
-								item.buildUpon()
-									.setUri(File(localPath).toUri())
-									.build()
-							} else null
-						} else {
-							val newUri = getStreamUrl(id)
-							if (isCurrentlyLocal || item.localConfiguration?.uri != newUri) {
-								item.buildUpon()
-									.setUri(newUri)
-									.build()
-							} else null
-						}
-
-						if (newItem != null) {
-							player.replaceMediaItem(i, newItem)
-						}
-					}
-				}
 			}
 		}
 	}
