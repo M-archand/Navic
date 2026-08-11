@@ -13,7 +13,6 @@ val isTaskRelease = gradle.startParameter.taskNames.any { it.contains("release",
 extensions.configure<ApplicationExtension> {
 	namespace = "paige.navic.androidApp"
 	compileSdk = libs.versions.android.compileSdk.get().toInt()
-	ndkVersion = "28.2.13676358"
 
 	buildFeatures {
 		resValues = true
@@ -73,6 +72,10 @@ extensions.configure<ApplicationExtension> {
 			excludes += "/META-INF/versions/9/OSGI-INF/MANIFEST.MF"
 			excludes += "/org/bouncycastle/**"
 			excludes += "/META-INF/{AL2.0,LGPL2.1}"
+		}
+
+		jniLibs {
+			keepDebugSymbols.add("**/*.so")
 		}
 	}
 
